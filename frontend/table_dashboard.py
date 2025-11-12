@@ -1334,7 +1334,7 @@ def update_undervalued_players():
                 break
         
         uvs_table = None
-        if main_data_path.exists():
+        if main_data_path and main_data_path.exists():
             try:
                 df_main = pd.read_csv(main_data_path)
                 hitters = df_main[df_main.get('position_type', '') == 'Hitter'].copy()
