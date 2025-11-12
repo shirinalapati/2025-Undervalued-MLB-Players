@@ -1,0 +1,51 @@
+# Python Dependencies for Undervalued MLB Players Project
+#
+# This project uses statistical analysis (UVS formula) to identify undervalued hitters
+# from the 2025 MLB season. No machine learning libraries are required.
+#
+# Core dependencies:
+# - pandas, numpy: Data manipulation and numerical computations
+# - pybaseball: MLB data collection (Statcast, FanGraphs)
+# - dash, plotly: Interactive web dashboard
+# - fastapi: Optional REST API for programmatic access
+
+# Core Data Science
+pandas>=2.0.0
+numpy>=1.24.0
+polars>=0.19.0
+
+# Baseball Data
+pybaseball>=2.2.0
+baseball-reference>=0.1.0
+
+# API Framework
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.0.0
+
+# Data Visualization
+plotly>=5.17.0
+dash>=2.14.0
+dash-bootstrap-components
+beautifulsoup4
+requests>=1.5.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Database
+sqlalchemy>=2.0.0
+
+# Data Pipeline
+prefect>=2.14.0
+requests>=2.31.0
+
+# Utilities
+python-dotenv>=1.0.0
+tqdm>=4.66.0
+jupyter>=1.0.0
+notebook>=7.0.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
