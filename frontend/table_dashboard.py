@@ -1432,14 +1432,17 @@ def update_undervalued_players():
 if __name__ == '__main__':
     import os
     
+    # Get port from environment variable (for Render/Heroku) or default to 8050
+    port = int(os.environ.get('PORT', 8050))
+    
     print("\n" + "="*60)
     print("Undervalued MLB Players - Statistics Table")
     print("="*60)
     print("\n📊 Table-Only Dashboard")
-    print("\nDashboard will be available at: http://localhost:8050")
+    print(f"\nDashboard will be available at: http://localhost:{port}")
     print("="*60 + "\n")
     
     # Use host 0.0.0.0 to make it accessible
     # Set debug=False for more stable operation
-    app.run(debug=False, host='0.0.0.0', port=8050, use_reloader=False)
+    app.run(debug=False, host='0.0.0.0', port=port, use_reloader=False)
 

@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: undervalued-mlb-players
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python frontend/table_dashboard.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+
