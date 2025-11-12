@@ -30,6 +30,7 @@ from numpy import integer as np_integer, floating as np_floating
 import requests
 from pathlib import Path
 import sys
+import os
 
 # Add parent directory to path
 sys.path.append(str(Path(__file__).parent.parent))
@@ -410,8 +411,21 @@ def fetch_player_data(position_type, top_n, sort_metric='uvs'):
     
     # Fallback: Load from local file
     try:
-        data_path = Path(__file__).parent.parent / "data" / "processed" / "comprehensive_stats_2025.csv"
-        if data_path.exists():
+        # Try multiple path options for different deployment scenarios
+        base_paths = [
+            Path(__file__).parent.parent,  # Relative to this file
+            Path.cwd(),  # Current working directory (set by WSGI)
+            Path(os.getcwd()),  # Explicit current working directory
+        ]
+        
+        data_path = None
+        for base_path in base_paths:
+            potential_path = base_path / "data" / "processed" / "comprehensive_stats_2025.csv"
+            if potential_path.exists():
+                data_path = potential_path
+                break
+        
+        if data_path and data_path.exists():
             df = pd.read_csv(data_path)
             
             # Filter by position
@@ -1305,8 +1319,19 @@ def update_about_page():
 def update_undervalued_players():
     """Display undervalued players analysis."""
     try:
-        # Load main data for UVS scores
-        main_data_path = Path(__file__).parent.parent / "data" / "processed" / "comprehensive_stats_2025.csv"
+        # Load main data for UVS scores - try multiple path options
+        base_paths = [
+            Path(__file__).parent.parent,  # Relative to this file
+            Path.cwd(),  # Current working directory (set by WSGI)
+            Path(os.getcwd()),  # Explicit current working directory
+        ]
+        
+        main_data_path = None
+        for base_path in base_paths:
+            potential_path = base_path / "data" / "processed" / "comprehensive_stats_2025.csv"
+            if potential_path.exists():
+                main_data_path = potential_path
+                break
         
         uvs_table = None
         if main_data_path.exists():
